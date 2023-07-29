@@ -2,9 +2,13 @@ name: Postman Collection Runner
 
 on:
   push:
-    branches:
-      - main  # Defina a branch que acionará o workflow
-
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+  schedule:
+      - cron: "0 9,12,15,18,21 * * *"
+      
 jobs:
   run_postman_collection:
     name: Run Postman Collection

@@ -23,7 +23,7 @@ jobs:
       run: npm install -g newman
 
     - name: Run Postman Collection
-      run: newman run "Marvel API.postman_collection.json" -e "MarvelEnviorement.postman_environment.json" -r htmlextra --reporter-html-export ./test-report.html
+      run: newman run "Marvel API.postman_collection.json" -e "MarvelEnviorement.postman_environment.json" -r htmlextra --reporter-html-export
 
     - name: Upload Report
       uses: actions/upload-artifact@v2

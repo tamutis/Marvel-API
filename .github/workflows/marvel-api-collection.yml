@@ -1,0 +1,32 @@
+name: Postman Collection Runner
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run_postman_collection:
+    name: Run Postman Collection
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout the repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 18
+
+    - name: Install Newman (Postman CLI)
+      run: npm install -g newman
+
+    - name: Run Postman Collection
+      run: newman run "Marvel API.postman_collection.json" -e "MarvelEnviorement.postman_environment.json" -r htmlextra --reporter-html-export test-report.html
+
+    - name: Upload Report
+      uses: actions/upload-artifact@v2
+      with:
+        name: test-report
+        path: test-report.html

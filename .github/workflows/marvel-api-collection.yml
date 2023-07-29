@@ -2,9 +2,8 @@ name: Postman Collection Runner
 
 on:
   push:
-  workflow_dispatch:
-  schedule:
-    - cron: "0 9,12,15,18,21 * * *"
+    branches:
+      - main
 
 jobs:
   run_postman_collection:
@@ -24,7 +23,7 @@ jobs:
       run: npm install -g newman
 
     - name: Run Postman Collection
-      run: newman run "Marvel API.postman_collection.json" -e "MarvelEnviorement.postman_environment.json" -r htmlextra --reporter-html-export
+      run: newman run "Marvel API.postman_collection.json" -e "MarvelEnviorement.postman_environment.json" -r htmlextra --reporter-html-export test-report.html
 
     - name: Upload Report
       uses: actions/upload-artifact@v2
